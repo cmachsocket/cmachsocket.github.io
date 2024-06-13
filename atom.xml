@@ -6,7 +6,7 @@
   <link href="http://cmach_socket.github.io/atom.xml" rel="self"/>
   
   <link href="http://cmach_socket.github.io/"/>
-  <updated>2024-06-13T13:50:20.710Z</updated>
+  <updated>2024-06-13T23:19:02.939Z</updated>
   <id>http://cmach_socket.github.io/</id>
   
   <author>
@@ -17,17 +17,341 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>[404]</title>
-    <link href="http://cmach_socket.github.io/2024/06/13/404-md/"/>
-    <id>http://cmach_socket.github.io/2024/06/13/404-md/</id>
-    <published>2024-06-13T13:50:09.430Z</published>
-    <updated>2024-06-13T13:50:20.710Z</updated>
+    <title>扩展CRT.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/14/%E6%89%A9%E5%B1%95CRT-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/14/%E6%89%A9%E5%B1%95CRT-md/</id>
+    <published>2024-06-13T23:18:57.000Z</published>
+    <updated>2024-06-13T23:19:02.939Z</updated>
+    
+    <content type="html"><![CDATA[<p>思路:转化为求解二元一次方程,再合并</p><p>求解:<br>$$\begin{cases}<br>x \equiv r_{1} \quad  (mod  \quad m_{1} ) \<br>x \equiv r_{2} \quad (mod \quad m_{2}  )\<br>\quad … \<br>x \equiv r_{n} \quad (mod \quad m_{n})<br>\end{cases}$$</p><p>其中$x \in Z  \bigvee r,m \subseteq Z$                               </p><p>首先考虑:<br>$$\begin{cases}<br>x \equiv r_{1} \quad  (mod  \quad m_{1} ) \<br>x \equiv r_{2} \quad (mod \quad m_{2}  )<br>\end{cases} $$</p><p>设<br> $$x &#x3D; k_{1}m_{1}+r_{1}&#x3D;k_{2}m_{2}+r_{2}$$<br>则<br>  $$k_{1}m_{1}-k_{2}m_{2}&#x3D;r_{2}-r_{1}$$<br>根据ex_gcd,可得有解为<br>  $$ r_{2}-r_{1} \equiv 0 \quad (mod \quad gcd(m_{1},m_{2}))$$<br>即 $r_{2}-r_{1}$能够整除 $gcd(m_{1},m_{2})$<br>设<br> $$d&#x3D;gcd(m_{1},m_{2})$$<br> $$p_{1}&#x3D; \frac{m_{1}}{d},p_{2}&#x3D; \frac{m_{2}}{d}$$</p><p>上列式子转化为<br>$$  k_{1}p_{1}+k_{2}p_{2}&#x3D;\frac{r_{2}-r_{1}}{d}$$</p><h3 id="可以发现-p-1-与p-2-互质"><a href="#可以发现-p-1-与p-2-互质" class="headerlink" title="可以发现,$p_{1}与p_{2}$互质,"></a><strong>可以发现,$p_{1}与p_{2}$互质,</strong></h3><p>$$\frac{r_{2}-r_{1}}{d}$$ </p><h3 id="为整数"><a href="#为整数" class="headerlink" title="为整数"></a><strong>为整数</strong></h3><p>$$\therefore k_{1}p_{1}+k_{2}p_{2}&#x3D;\frac{r_{2}-r_{1}}{d}$$<br>可转化为<br>$$p_{1}k_{1}\equiv \frac{r_{2}-r_{1}}{d}\quad (mod \quad p_{2})$$<br>$$k_{1} \equiv  inv(p_{1},p_{2})\cdot \frac{r_{2}-r_{1}}{d} \quad (mod \quad p_{2})$$<br>转回去<br>$$k_{1} &#x3D;  inv(p_{1},p_{2})\cdot \frac{r_{2}-r_{1}}{d} \quad +p_{2}\cdot y$$<br>回代,得<br>$$x&#x3D;k_{1}m_{1}+r_{1}$$<br>$$x&#x3D;inv(p_{1},p_{2})\cdot \frac{r_{2}-r_{1}}{d} m_{1}+p_{2} y m_{1}+r_{1}$$<br>代换,得<br>$$x&#x3D;inv(p_{1},p_{2})\cdot p_{1}( r_{2}-r_{1})+r_{1}+p_{2} y m_{1}$$<br>转化<br>$$x \equiv inv(p_{1},p_{2})\cdot p_{1}( r_{2}-r_{1})+r_{1} \quad (mod \quad p_{2} m_{1})$$<br>全部代回去<br>$$x \equiv inv(\frac{m_{1}}{gcd(m_{1},m_{2})},\frac{m_{2}}{gcd(m_{1},m_{2})})\cdot\frac{m_{1}( r_{2}-r_{1})}{gcd(m_{1},m_{2})}+r_{1} \quad (mod \quad\frac{m_{1}m_{2}}{gcd(m_{1},m_{2})})$$</p><p>发现模数就是lcm<br>$$x \equiv inv(\frac{m_{1}}{gcd(m_{1},m_{2})},\frac{m_{2}}{gcd(m_{1},m_{2})})\cdot\frac{m_{1}( r_{2}-r_{1})}{gcd(m_{1},m_{2})}+r_{1} \quad (mod \quad lcm(m_{1},m_{2}))$$</p><p>经过一次转化,又转化为了$x \equiv r \quad  (mod  \quad m)$的形式,经过n-1次转化,最后只有一个式子,根据上面加粗式子的推导,如果每次转化都有解,可知最后的x一定可以求解</p>]]></content>
     
     
-    <summary type="html">May the Force be with you :&amp;#41;</summary>
+      
+      
+    <summary type="html">&lt;p&gt;思路:转化为求解二元一次方程,再合并&lt;/p&gt;
+&lt;p&gt;求解:&lt;br&gt;$$&#92;begin{cases}&lt;br&gt;x &#92;equiv r_{1} &#92;quad  (mod  &#92;quad m_{1} ) &#92;&lt;br&gt;x &#92;equiv r_{2} &#92;quad (mod &#92;quad m_{2} </summary>
+      
     
     
     
+    
+  </entry>
+  
+  <entry>
+    <title>demogen/容斥.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/14/demogen-%E5%AE%B9%E6%96%A5-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/14/demogen-%E5%AE%B9%E6%96%A5-md/</id>
+    <published>2024-06-13T23:18:20.000Z</published>
+    <updated>2024-06-13T23:18:24.626Z</updated>
+    
+    <content type="html"><![CDATA[<p>德摩根:<br>$$\overline{\bigcup_{i&#x3D;1}^{n}A_{i}}&#x3D;\bigcap_{i&#x3D;1}^{n}\overline{A_{i}}$$</p><p>$$\overline{\bigcap_{i&#x3D;1}^{n}A_{i}}&#x3D;\bigcup_{i&#x3D;1}^{n}\overline{A_{i}}$$</p><p>求一个全集中所有子集的交</p><p>$$\begin{split}<br>\left|\bigcup_{i&#x3D;1}^{n}S_i\right|&#x3D;&amp;\sum_{i}|S_i|-\sum_{i&lt;j}|S_i\cap S_j|+\sum_{i&lt;j&lt;k}|S_i\cap S_j\cap S_k|-\cdots\<br>&amp;+(-1)^{m-1}\sum_{a_i&lt;a_{i+1} }\left|\bigcap_{i&#x3D;1}^{m}S_{a_i}\right|+\cdots+(-1)^{n-1}|S_1\cap\cdots\cap S_n|<br>\end{split}$$</p><p>即</p><p>$$<br>\left|\bigcup_{i&#x3D;1}^{n}S_i\right|&#x3D;\sum_{m&#x3D;1}^n(-1)^{m-1}\sum_{a_i&lt;a_{i+1} }\left|\bigcap_{i&#x3D;1}^mS_{a_i}\right|<br>$$</p><p>求一个全集中所有子集的并<br>$$<br>\left|\bigcap_{i&#x3D;1}^{n}S_i\right|&#x3D;|U|-\left|\overline{\bigcap_{i&#x3D;1}^n S_i}\right|<br>$$<br>套用demogen定理<br>$$<br>&#x3D;|U|-\left|\bigcup_{i&#x3D;1}^n\overline{S_i}\right|<br>$$</p><p>对右边进行容斥,<br>$$&#x3D;\left|U\right|+\sum_{m&#x3D;1}^{n}(-1)^m\sum_{a_{i}&lt;a_{i+1}}\left|\bigcap_{i&#x3D;1}^{m}\overline{S_{a_{i}}}\right|$$</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;德摩根:&lt;br&gt;$$&#92;overline{&#92;bigcup_{i&amp;#x3D;1}^{n}A_{i}}&amp;#x3D;&#92;bigcap_{i&amp;#x3D;1}^{n}&#92;overline{A_{i}}$$&lt;/p&gt;
+&lt;p&gt;$$&#92;overline{&#92;bigcap_{i&amp;#x3D;1}^{n}A</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一些大运算.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/14/%E4%B8%80%E4%BA%9B%E5%A4%A7%E8%BF%90%E7%AE%97-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/14/%E4%B8%80%E4%BA%9B%E5%A4%A7%E8%BF%90%E7%AE%97-md/</id>
+    <published>2024-06-13T23:17:54.000Z</published>
+    <updated>2024-06-13T23:18:00.676Z</updated>
+    
+    <content type="html"><![CDATA[<p>总体来说,也遵循提公因式和因式分解</p><p>此外,还有一些特殊的运算</p><p>设</p><p>$$\overline{x} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} a_{i} $$</p><p>$$s &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} (a_{i}-\overline{x})^2 $$</p><p>则有</p><p>$$s &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} (a_{i}^2 - 2 \overline{x}a_{i} + \overline{x}^2) $$<br> $$ &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} a_{i}^2 -\frac{1}{n} \sum_{i&#x3D;1}^{n} 2 \overline{x}a_{i} +\frac{1}{n} \sum_{i&#x3D;1}^{n} \overline{x}^2 $$</p><p>  $$ &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} a_{i}^2 -   \frac{2}{n} \overline{x} \sum_{i&#x3D;1}^{n} a_{i} + \overline{x}^2 $$</p><p> $$\because \sum_{i&#x3D;1}^{n} a_{i}&#x3D; n\overline{x} $$<br>  $$ \therefore s &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} a_{i}^2 -  \overline{x}^2 $$<br>  $$&#x3D; \frac{1}{n} \left[\sum_{i&#x3D;1}^{n} a_{i}^2 - \frac{1}{n} (\sum_{i&#x3D;1}^{n}a_{i})^2\right] $$</p><h3 id="从方差展开中可以看出"><a href="#从方差展开中可以看出" class="headerlink" title="从方差展开中可以看出:"></a>从方差展开中可以看出:</h3><ul><li>对于常数$a$ (提公因式?)</li></ul><p>$$na &#x3D; \sum_{i&#x3D;1}^{n} a$$</p><ul><li>对于数组$b,c$  (因式分解?)<br>$$\sum_{i&#x3D;1}^{n}b_{i}+c_{i}&#x3D;\sum_{i&#x3D;1}^{n}b_{i}+\sum_{i&#x3D;1}^{n}c_{i}$$</li></ul><h4 id="下列两式由上面两式推导得来"><a href="#下列两式由上面两式推导得来" class="headerlink" title="下列两式由上面两式推导得来:"></a>下列两式由上面两式推导得来:</h4><ul><li><p>对于常数$a$,数组$b$<br>$$\sum_{i&#x3D;1}^{n}a\times b_{i}&#x3D;a\sum_{i&#x3D;1}^{n} b_{i}$$</p></li><li><p>对于常数$a$,数组$b$<br>$$\sum_{i&#x3D;1}^{n}(b_{i}+a)&#x3D;na+\sum_{i&#x3D;1}^{n}b_{i}$$</p></li><li><p>此外<br> $$\sum_{i&#x3D;1}^{n}a_{i}^2 \neq (\sum_{i&#x3D;1}^{n}a_{i})^2 $$</p></li></ul><h3 id="连乘符号"><a href="#连乘符号" class="headerlink" title="连乘符号:"></a>连乘符号:</h3><p> 没有什么较复杂的变化,但是有一个简单的公式</p><ul><li><p>对于常数$a$<br>  $$\prod_{i&#x3D;1}^{n} a &#x3D; a^n$$</p></li><li><p>对于常数n<br>   $$ n! &#x3D;\prod_{i&#x3D;1}^{n}i $$</p></li></ul><p>  了解到的:</p><ul><li>断裂:对于数组a<br>  $$\prod_{i&#x3D;1}^{n}a_{i} &#x3D; \frac{\prod_{j&#x3D;1}^{n+m}a_{j}}{\prod_{k&#x3D;1}^{m}a_{k}}$$<br>  上式也可以写成这样:<br>$$\prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}i}{\prod_{j&#x3D;1}^{n-m}j}$$<br>前面n-m是不乘的,后面有m个</li></ul><p>转化一下:<br> $$\prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{n!}{(n-m)!}$$<br> 排列公式</p><p> 连加版:<br> $$\sum_{i&#x3D;1}^{n}a_{i} &#x3D; \sum_{j&#x3D;1}^{n+m}a_{j}-<br> \sum_{k&#x3D;1}^{m}a_{k}$$</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;总体来说,也遵循提公因式和因式分解&lt;/p&gt;
+&lt;p&gt;此外,还有一些特殊的运算&lt;/p&gt;
+&lt;p&gt;设&lt;/p&gt;
+&lt;p&gt;$$&#92;overline{x} &amp;#x3D; &#92;frac{1}{n} &#92;sum_{i&amp;#x3D;1}^{n} a_{i} $$&lt;/p&gt;
+&lt;p&gt;$$s &amp;#x3D; &#92;f</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hash.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/hash-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/hash-md/</id>
+    <published>2024-06-13T14:41:16.000Z</published>
+    <updated>2024-06-13T14:41:18.608Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="单hash"><a href="#单hash" class="headerlink" title="单hash"></a>单hash</h2><p>定义了上面的两个数组，首先 hash[i] 表示前 i 个字符的字串的hash 值。而 p[i] 表示 $Base ^ i$ </p><p>那么对应的 Hash 公式为：</p><p>$$hash[i] &#x3D; (hash[i-1] * Base + idx(s[i])) % MOD$$</p><p>对于此种Hash方法，将Base和MOD尽量取大即可，这种情况下，冲突的概率是很低的。</p><h3 id="双Hash"><a href="#双Hash" class="headerlink" title="双Hash"></a>双Hash</h3><p>用字符串Hash，最怕的就是，出现冲突的情况，即不同字符串却有着相同的hash值，这是我们不想看到的。所以为了降低冲突的概率，可以用双Hash方法。</p><p>将一个字符串用不同的Base和MOD，hash两次，将这两个结果用一个二元组表示，作为一个总的Hash结果。</p><p>相当于我们用不同的Base和MOD，进行两次 单Hash方法 操作，然后将得到的结果，变成一个二元组结果，这样子，我们要看一个字符串，就要同时对比两个 Hash 值，这样子出现冲突的概率就很低了。</p><p>那么对应的 Hash 公式为：</p><p>$$hash1[i] &#x3D; (hash1[i-1] * Base1 + idx(s[i])) % MOD1$$</p><p>$$hash2[i] &#x3D; (hash2[i-1] * Base2 + idx(s[i])) % MOD2$$</p><p>映射的Hash结果为：$&lt;hash1[i], hash2[i]&gt;$</p><p>这种Hash很安全。</p><p>构造hash时的递推式:</p><p>$$hash[i] &#x3D; hash[i-1] * Base + idx (s[i])$$</p><h2 id="获取子串的Hash"><a href="#获取子串的Hash" class="headerlink" title="获取子串的Hash"></a>获取子串的Hash</h2><p>$O(1)$</p><p>上面我们得到的 Hash值都是前 i 个字符的字串，那么如果我们想获取 [l,r] 范围中的字串的Hash值，应该如何做。（利用Hash值，我们可以O(1) 时间来获取某个字串。）</p><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>假设有一个 $S &#x3D; s_{1}s_{2}s_{3}s_{4}s_{5}$ 的字符串，根据定义，获取其 Hash值如下（先忽略MOD）：</p><p>$hash[0] &#x3D; 0$</p><p>$hash[1] &#x3D; s_1$</p><p>$hash[2] &#x3D; s_1 * Base + s2$</p><p>$hash[3] &#x3D; s_1 * Base^2 + s2 * Base + s_3$</p><p>$hash[4] &#x3D; s_1 * Base^3 + s2 * Base^2 + s_3 * Base + s_4$</p><p>$hash[5] &#x3D; s_1 * Base^4 + s2 * Base^3 + s_3 * Base^2 + s_4 * Base + s_5$</p><p>现在我们想求字串 $s_3s_4$ 的hash值，不难得出为 $s_3 * Base + s4$ ，并且从上面观察，如果看$hash[4] - hash[2]$并将结果的多余$s_1,s_2$的系数全部消掉，就是所求。所以问题就转化成，将$hash[2]$乘一个关于$Base$的系数，在做差的时候将多余项消除，从而得到结果。</p><p>不难发现，对应项系数只差一个 $Base^2$ ，而$4 - 2 &#x3D; 2$(待求hash子串下标相减即可)，</p><p>$$hash[4] - hash[2] * Base^2$$</p><p>至此，通过对上例的归纳，可以得出如下的公式。</p><p>$$res &#x3D; hash[r] - hash[l-1] * Base^{r - l + 1}$$</p><p>取模,但是有减法:</p><p>$$res &#x3D; ((hash[r] - hash[l-1] * Base^{r - l + 1}) % MOD + MOD) % MOD$$</p><p>预处理$Base^i$,降低$Base$幂的计算</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;单hash&quot;&gt;&lt;a href=&quot;#单hash&quot; class=&quot;headerlink&quot; title=&quot;单hash&quot;&gt;&lt;/a&gt;单hash&lt;/h2&gt;&lt;p&gt;定义了上面的两个数组，首先 hash[i] 表示前 i 个字符的字串的hash 值。而 p[i] 表示 $Base </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>矩阵乘法.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-md/</id>
+    <published>2024-06-13T14:41:02.000Z</published>
+    <updated>2024-06-13T14:41:06.161Z</updated>
+    
+    <content type="html"><![CDATA[<p>$A_{i,j}&#x3D;c$ 表示 将$c$倍$f_{j}$转移到$f_{i}$</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;$A_{i,j}&amp;#x3D;c$ 表示 将$c$倍$f_{j}$转移到$f_{i}$&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>FHQ-Treap.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/FHQ-Treap-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/FHQ-Treap-md/</id>
+    <published>2024-06-13T14:40:46.000Z</published>
+    <updated>2024-06-13T14:40:49.201Z</updated>
+    
+    <content type="html"><![CDATA[<p>依赖分裂合并的tree+heap（听起来像ODT）</p><h2 id="核心操作："><a href="#核心操作：" class="headerlink" title="核心操作："></a>核心操作：</h2><p>分裂：</p><p>一种是按权值分裂，一种是按排名分裂</p><p>根据粉兔的博客，发现权值操作都可以通过rank转化为排名</p><p>于是乎只打排名了</p><p>当前需要的排名比左儿子数量大，即左子树和其本身归为第一颗分裂树，进入右子树</p><p>反之同理，上述过程可以用BST性质解释</p><p>通过BST的性质，也可以知道传下来的引用就是两颗子树预备插入节点</p><p>合并：</p><p>treap以随机化id来构造期望平衡的BST，合并的时候第一颗树的所有节点一定比第二颗树小，</p><p>于是合并时候只需考虑合并节点的 $id$</p><p>左子树 $id$ 小，将右子树挂载到右儿子下，右子树 $id$ 小，则将左子树挂载到右子树左儿子上，可以保证满足BST性质</p><p>通过这两个操作可以完成各种操作，并且本身支持区间（分裂出来就是一个一个一个区间啊啊啊啊啊啊啊）和可持续化。</p><h2 id="基本操作："><a href="#基本操作：" class="headerlink" title="基本操作："></a>基本操作：</h2><h3 id="查询x的排名"><a href="#查询x的排名" class="headerlink" title="查询x的排名 :"></a><strong>查询x的排名</strong> :</h3><p>由于没有权值分裂，所以需要递归查找，通过BST的性质，每次递归进入一个子树</p><p>注意：这样查询是查询到$\leq v$的最末尾</p><h3 id="插入"><a href="#插入" class="headerlink" title="插入 :"></a><strong>插入</strong> :</h3><p>构建一个节点，然后查询权值所在排名，将树分裂成两颗，将这两颗树与节点合并</p><h3 id="删除"><a href="#删除" class="headerlink" title="删除 :"></a><strong>删除</strong> :</h3><p>将树分裂成$v,v-1$三颗，删除中间等于$v$的那棵</p><p>如果只删除一个的话，可以合并中间那棵的左右子树，将根节点丢掉</p><p>然后再合并起来</p><p>垃圾回收？不存在的（）</p><h3 id="第k小"><a href="#第k小" class="headerlink" title="第k小 :"></a><strong>第k小</strong> :</h3><p>直接分裂成$k,k-1$三颗子树，输出中间那棵，再全部合并起来</p><h3 id="前驱"><a href="#前驱" class="headerlink" title="前驱 :"></a><strong>前驱</strong> :</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kth</span>(<span class="built_in">rank</span>(root,v<span class="number">-1</span>))</span><br></pre></td></tr></table></figure><h3 id="后继"><a href="#后继" class="headerlink" title="后继 :"></a><strong>后继</strong> :</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kth</span>(<span class="built_in">rank</span>(root,v)+<span class="number">1</span>)</span><br></pre></td></tr></table></figure><p><strong>注意</strong>：后继不可以查询$rank(root,v+1)$,很可能后继比$v+1$大，rank又是查找到$&lt;&#x3D;v+1$的最末尾</p><p>由于前驱一定$\leq v-1$，所以可以直接查询$rank(root,v-1)$</p><h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><p>查询一个数的排名一定要查询$rank(root,v-1)+1$,不然会查到相同元素的最末尾去</p><h2 id="一些感受："><a href="#一些感受：" class="headerlink" title="一些感受："></a>一些感受：</h2><p>实际上，fhq-treap根本不是按照中序遍历排序的。这个中序遍历只是人为规定的。</p><p>真正决定二叉树形态的是随机值，但不是唯一决定的。</p><p>对于权值fhq-treap来说，权值也是确定二叉树形态的条件，</p><p>对于排名fhq-treap来说，排名也是确定二叉树形态的条件。</p><p>当用$rank()$函数决定位置fhq-treap来说，排名与权值绑定，也可以看作为权值确定，那么这样建的树不是说他由中序遍历决定算法而是由算法决定他中序遍历是排序后的序列</p><p>于是，可以得出，排名fhq-treap的建立只与$rank()$有关，没有$rank()$只与插入位置有关,也就是说，rank()也可以决定二叉树的形态，没有$rank()$就默认以位置决定二叉树形态，</p><p>所以，可能有这么一道题，他要维护一种非常特殊的序列，可能需要中间大两边小，或者说十进制位数单调递增，这些fhq-treap都是可以维护的</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;依赖分裂合并的tree+heap（听起来像ODT）&lt;/p&gt;
+&lt;h2 id=&quot;核心操作：&quot;&gt;&lt;a href=&quot;#核心操作：&quot; class=&quot;headerlink&quot; title=&quot;核心操作：&quot;&gt;&lt;/a&gt;核心操作：&lt;/h2&gt;&lt;p&gt;分裂：&lt;/p&gt;
+&lt;p&gt;一种是按权值分裂，一种是按排</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>图上二分.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E5%9B%BE%E4%B8%8A%E4%BA%8C%E5%88%86-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E5%9B%BE%E4%B8%8A%E4%BA%8C%E5%88%86-md/</id>
+    <published>2024-06-13T14:40:28.000Z</published>
+    <updated>2024-06-13T14:40:31.638Z</updated>
+    
+    <content type="html"><![CDATA[<p>一般是二分边或者点的权值。属于二分答案</p><p>设 $check$ 为检测值，</p><p>当 $it.w&gt;check$ 或者 $a[it.y]&gt;check$ 时，走或者不走</p><p>用于解决最大值最小或者最小值最大的问题。</p><p>二分正确性：答案在边权或者点权的值域上，值域是单调的</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;一般是二分边或者点的权值。属于二分答案&lt;/p&gt;
+&lt;p&gt;设 $check$ 为检测值，&lt;/p&gt;
+&lt;p&gt;当 $it.w&amp;gt;check$ 或者 $a[it.y]&amp;gt;check$ 时，走或者不走&lt;/p&gt;
+&lt;p&gt;用于解决最大值最小或者最小值最大的问题。&lt;/p&gt;
+&lt;p&gt;二分正确</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2-SAT.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/2-SAT-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/2-SAT-md/</id>
+    <published>2024-06-13T14:40:05.000Z</published>
+    <updated>2024-06-13T14:40:11.505Z</updated>
+    
+    <content type="html"><![CDATA[<p>思路类似于差分约束,将数学问题转化为图论问题</p><p>也是判环来判断可行性</p><p><strong>建图+tarjan</strong></p><p>为什么不用spfa判环?</p><p>tarjan算法更优秀 $O(n+m)$ ,并且tarjan序就是反拓扑序,方便求解</p><h2 id="2-sat问题"><a href="#2-sat问题" class="headerlink" title="2-sat问题"></a>2-sat问题</h2><p>指每一个变量存在两种状态(2),这些变量需要满足一些条件(sat)</p><p>这些条件是逻辑条件:or,xor,and</p><h2 id="2-sat问题转化"><a href="#2-sat问题转化" class="headerlink" title="2-sat问题转化"></a>2-sat问题转化</h2><p>所有的逻辑关系都可以转化为这样的形式:选择了A,则必须选择B</p><p>从A到B连一条边,就可以表示这样的关系</p><p>若存在环内有一个变量的两个状态,则说明有一个无法满足的依赖链(例如 选$A_1$必选$B_2$ …. 选<br>$B_2$必选$A_2$),这时选$A_1$也不行,选$A_2$也不行</p><h2 id="2-sat的一种解"><a href="#2-sat的一种解" class="headerlink" title="2-sat的一种解:"></a>2-sat的一种解:</h2><p>  选择拓扑序较大的那一个,可以避免冲突(如果选了较小的一个,有可能会有一条路径会连通这个<br>变量的两个状态)</p><p>  tarjan使用了栈,与拓扑使用的队列是相反的,所以说tarjan强连通分量的顺序就是反拓扑序</p><p>  update:2-sat是离线的,不能代替扩展域并查集</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;思路类似于差分约束,将数学问题转化为图论问题&lt;/p&gt;
+&lt;p&gt;也是判环来判断可行性&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;建图+tarjan&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;为什么不用spfa判环?&lt;/p&gt;
+&lt;p&gt;tarjan算法更优秀 $O(n+m)$ ,并且tarjan序就是反拓</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>差分约束系统.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F-md/</id>
+    <published>2024-06-13T14:39:49.000Z</published>
+    <updated>2024-06-13T14:39:53.775Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="差分约束系统"><a href="#差分约束系统" class="headerlink" title="差分约束系统"></a>差分约束系统</h2><hr><p>$x_1-x_2 \leq y_1$</p><p>…</p><p>$x_i-x_j \leq y_i$</p><p>将$x_i-xj \leq y_i$ 移项，得</p><p>$x_i \leq x_j+y_i$</p><p>可建立一条从$x_j$到$x_i$的路径，权值为$y_2$</p><p>将线性规划问题转化为图论问题</p><hr><h3 id="差分约束系统的转化"><a href="#差分约束系统的转化" class="headerlink" title="差分约束系统的转化:"></a>差分约束系统的转化:</h3><ul><li><p>$x_1-x_2 \geq y  \to  x_2-x_1 \leq -y_1$</p></li><li><p>$x_1 &#x3D; x_2     \to  x_1-x_2 \leq 0 \quad and \quad x_2-x_1 \leq 0$</p></li><li><p>$x_1 - x_2 &lt; y   \to  x_1-x_2 \leq y-1$ (整数解)</p></li><li><p>$x_1-x_2&gt;y   \to  x_2-x_1 \leq -y-1$ (整数解)</p></li></ul><p><strong>对于差分约束系统,有解就必定有无数解</strong></p><p>证明:</p><p>若 存在一组解 ${x_1,x_2,x_3,…,x_{n-1},x_n}$</p><p>则 ${x_1+k,x_2+k,x_3+k,…,x_{n-1}+k,x_n+k}$ 也是该差分约束系统的解</p><p>无解的情况即存在负权环，因为此时SPFA无解</p><p>启用超级源点 $0$ ,设置$dis_0&#x3D;w$,向所有节点添加边为 $x_i-x_0 \leq 0  (i|n)$</p><p>由于$dis_0&#x3D;w$,则$x_0&#x3D;w$ (一般设$w&#x3D;0$);</p><p>对于所有的 $x_i,x_i \leq x_0$ 即 $x_i \leq w$</p><p>相应地加上$k$ ,即得到非负解</p><p>求最短路，相当于求最大解</p><p>求最长路，相当于求最小解</p><p>注意：求最长路，要转化为$x_1 \geq x_2+y$的形式</p><h3 id="一些理解："><a href="#一些理解：" class="headerlink" title="一些理解："></a>一些理解：</h3><p>观察这个式子：$x1 \leq x2+y1$,发现如果按图论来说，从$x2$点到$x1$点最多需要走$y1$的路的，如果从$x2$点到$x1$点建立一条长$y1$的路，多的远路不能走，但是少的远路能走，这就构成了最短路算法的松弛基础。于是乎才能使用最短路去求解的。反之最长路就是多的远路能走，短远路不能走，所以是$x_1 \geq x_2+y$</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;差分约束系统&quot;&gt;&lt;a href=&quot;#差分约束系统&quot; class=&quot;headerlink&quot; title=&quot;差分约束系统&quot;&gt;&lt;/a&gt;差分约束系统&lt;/h2&gt;&lt;hr&gt;
+&lt;p&gt;$x_1-x_2 &#92;leq y_1$&lt;/p&gt;
+&lt;p&gt;…&lt;/p&gt;
+&lt;p&gt;$x_i-x_j &#92;leq </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>树型DP和缩点后树型DP.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E6%A0%91%E5%9E%8BDP%E5%92%8C%E7%BC%A9%E7%82%B9%E5%90%8E%E6%A0%91%E5%9E%8BDP-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E6%A0%91%E5%9E%8BDP%E5%92%8C%E7%BC%A9%E7%82%B9%E5%90%8E%E6%A0%91%E5%9E%8BDP-md/</id>
+    <published>2024-06-13T14:39:21.000Z</published>
+    <updated>2024-06-13T14:39:26.432Z</updated>
+    
+    <content type="html"><![CDATA[<p>基本的方程:</p><p>$f[u]&#x3D;\sum_{v \in son(u)}f[v]+calc(v)$</p><p>$f[u]&#x3D;\max_{v \in son(u)}f[v]+calc(v)$</p><h1 id="CTSC1997-选课"><a href="#CTSC1997-选课" class="headerlink" title="[CTSC1997] 选课"></a>[CTSC1997] 选课</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习，在课程里有些课程必须在某些课程之前学习，如高等数学总是在其它课程之前学习。现在有 $N$ 门功课，每门课有个学分，每门课有一门或没有直接先修课（若课程 a 是课程 b 的先修课即只有学完了课程 a，才能学习课程 b）。一个学生要从这些课程里选择 $M$ 门课程学习，问他能获得的最大学分是多少？</p><h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行有两个整数 $N$ , $M$ 用空格隔开。( $1 \leq N \leq 300$ , $1 \leq M \leq 300$ )</p><p>接下来的 $N$ 行,第 $I+1$ 行包含两个整数 $k_i $和 $s_i$, $k_i$ 表示第I门课的直接先修课，$s_i$ 表示第I门课的学分。若 $k_i&#x3D;0$ 表示没有直接先修课（$1 \leq {k_i} \leq N$ , $1 \leq {s_i} \leq 20$）。</p><h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>只有一行，选 $M$ 门课程的最大得分。</p><h2 id="样例-1"><a href="#样例-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">7  4</span><br><span class="line">2  2</span><br><span class="line">0  1</span><br><span class="line">0  4</span><br><span class="line">2  1</span><br><span class="line">7  1</span><br><span class="line">7  6</span><br><span class="line">2  2</span><br></pre></td></tr></table></figure><h3 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13</span><br></pre></td></tr></table></figure><p>$f[u][i]&#x3D;max^{n}_{i&#x3D;1}f[u][i-j]+f[v][j]$</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 305</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">list&lt;<span class="type">int</span>&gt;g[MAXN];</span><br><span class="line"><span class="type">int</span> tx,tw,ty,n,m,a[MAXN],siz[MAXN],f[MAXN][MAXN];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">siz[x]=<span class="number">1</span>,f[x][<span class="number">1</span>]=a[x];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:g[x])&#123;</span><br><span class="line"><span class="built_in">dfs</span>(it);</span><br><span class="line">siz[x]+=siz[it];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:g[x])&#123;</span><br><span class="line"><span class="built_in">solve</span>(it);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="built_in">min</span>(siz[x],m+<span class="number">1</span>);i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j=<span class="built_in">min</span>(siz[it],i<span class="number">-1</span>);j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">f[x][i]=<span class="built_in">max</span>(f[x][i],f[x][i-j]+f[it][j]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">link</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">g[x].<span class="built_in">emplace_back</span>(y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;ty,&amp;a[i]);</span><br><span class="line"><span class="built_in">link</span>(ty,i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">dfs</span>(<span class="number">0</span>);</span><br><span class="line"><span class="built_in">solve</span>(<span class="number">0</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,f[<span class="number">0</span>][m+<span class="number">1</span>]);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="强连通分量的缩点"><a href="#强连通分量的缩点" class="headerlink" title="强连通分量的缩点"></a>强连通分量的缩点</h2><ul><li><p>将非DAG图处理为DAG</p></li><li><p>可以跑拓扑排序和一些其他的算法</p></li></ul><p>局限性:<br>    不可以缩有效性的环</p><h1 id="采蘑菇"><a href="#采蘑菇" class="headerlink" title="采蘑菇"></a>采蘑菇</h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>小胖和 ZYR 要去 ESQMS 森林采蘑菇。</p><p>ESQMS 森林间有 $N$ 个小树丛，$M$ 条小径，每条小径都是 <strong>单向</strong> 的，连接两个小树丛，上面都有一定数量的蘑菇。小胖和 ZYR 经过某条小径一次，可以采走这条路上所有的蘑菇。由于 ESQMS 森林是一片神奇的沃土，所以一条路上的蘑菇被采过后，又会长出一些新的蘑菇，数量为原来蘑菇的数量乘上这条路的“恢复系数”，再下取整。</p><p>比如，一条路上有 $4$ 个蘑菇，这条路的“恢复系数”为 $0.7$，则第一~四次经过这条路径所能采到的蘑菇数量分别为 $4,2,1,0$。</p><p>现在，小胖和 ZYR 从 $S$ 号小树丛出发，求他们最多能采到多少蘑菇。</p><h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行两个整数，$N$ 和 $M$。</p><p>第二行到第 $M+1$ 行，每行四个数，分别表示一条小路的起点，终点，初始蘑菇数，恢复系数。</p><p>第 $M+2$ 行，一个整数 $S$。</p><h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>一行一个整数，表示最多能采到多少蘑菇，保证答案不超过 $(2^{31}-1)$。</p><h2 id="样例-1-1"><a href="#样例-1-1" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1-1"><a href="#样例输入-1-1" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">3 3</span><br><span class="line">1 2 4 0.5</span><br><span class="line">1 3 7 0.1</span><br><span class="line">2 3 4 0.6</span><br><span class="line">1</span><br></pre></td></tr></table></figure><h3 id="样例输出-1-1"><a href="#样例输出-1-1" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">8</span><br></pre></td></tr></table></figure><h2 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h2><p>对于 $30%$ 的数据，$N\le 7$，$M\le15$</p><p>另有 $30%$ 的数据，满足所有“恢复系数”为 $0$。</p><p>对于 $100%$ 的数据，$1<br>\le N\le 8\times 10^4$，$1\le M\le 2\times 10^5$，$0\le\text{恢复系数}\le 0.8$ 且最多有一位小数， $1\le S\le N$。</p><p>$f[u]&#x3D;a[u]+max_{i&#x3D;1}^{n}f[v]+it.w$</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 200005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PPP puts(<span class="string">&quot;FUCK&quot;</span>);</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">node</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="type">int</span> y,w;</span><br><span class="line"><span class="built_in">node</span>(<span class="type">int</span> yy,<span class="type">int</span> ww)&#123;</span><br><span class="line">y=yy,w=ww;</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line">list&lt;<span class="type">int</span>&gt;g[MAXN];</span><br><span class="line">list&lt;node&gt;ng[MAXN];</span><br><span class="line">stack&lt;<span class="type">int</span>&gt;st;</span><br><span class="line"><span class="type">int</span> xs[MAXN];</span><br><span class="line"><span class="type">long</span> <span class="type">double</span> h;</span><br><span class="line"><span class="type">int</span> e[MAXN],a[MAXN],n,m,tx,low[MAXN],dfn[MAXN],cnt,tot,bel[MAXN],f[MAXN],s,dp[MAXN];</span><br><span class="line"><span class="type">bool</span> vis[MAXN],v[MAXN];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">low[x]=dfn[x]=++cnt;</span><br><span class="line">st.<span class="built_in">push</span>(x);</span><br><span class="line">vis[x]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:g[x])&#123;</span><br><span class="line"><span class="keyword">if</span>(!dfn[e[it]])&#123;</span><br><span class="line"><span class="built_in">tarjan</span>(e[it]);</span><br><span class="line">low[x]=<span class="built_in">min</span>(low[e[it]],low[x]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(vis[e[it]])&#123;</span><br><span class="line">low[x]=<span class="built_in">min</span>(dfn[e[it]],low[x]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(dfn[x]==low[x])&#123;</span><br><span class="line"><span class="type">int</span> now;</span><br><span class="line">tot++;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">now=st.<span class="built_in">top</span>();</span><br><span class="line">st.<span class="built_in">pop</span>();</span><br><span class="line">vis[now]=<span class="number">0</span>;</span><br><span class="line">bel[now]=tot;</span><br><span class="line">&#125;<span class="keyword">while</span>(x!=now);</span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="comment">//强连通分量</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">mkmap</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:g[i])&#123;</span><br><span class="line"><span class="keyword">if</span>(bel[i]==bel[e[it]])&#123;</span><br><span class="line"><span class="keyword">while</span>(a[it])&#123;</span><br><span class="line"><span class="comment">///PPP</span></span><br><span class="line">f[bel[i]]+=a[it];</span><br><span class="line">a[it]=a[it]*xs[it]/<span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">ng[bel[i]].<span class="built_in">emplace_back</span>(<span class="built_in">node</span>(bel[e[it]],a[it]));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="comment">//重建图</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">v[x]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:ng[x])&#123;</span><br><span class="line"><span class="keyword">if</span>(!v[it.y])&#123;</span><br><span class="line"><span class="built_in">dfs</span>(it.y);</span><br><span class="line">&#125;</span><br><span class="line">dp[x]=<span class="built_in">max</span>(dp[x],dp[it.y]+it.w);</span><br><span class="line">&#125;</span><br><span class="line">dp[x]+=f[x];</span><br><span class="line">&#125;<span class="comment">//DP</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d%d%d%Lf&quot;</span>,&amp;tx,&amp;e[i],&amp;a[i],&amp;h);</span><br><span class="line">g[tx].<span class="built_in">emplace_back</span>(i);</span><br><span class="line">xs[i]=h*<span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;s);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="keyword">if</span>(!dfn[i])<span class="built_in">tarjan</span>(i);</span><br><span class="line"><span class="built_in">mkmap</span>();</span><br><span class="line"><span class="built_in">dfs</span>(bel[s]);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,dp[bel[s]]);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h3 id="缩点后树型DP注意事项"><a href="#缩点后树型DP注意事项" class="headerlink" title="缩点后树型DP注意事项:"></a>缩点后树型DP注意事项:</h3><p>1.无环</p><p>2.无后效性</p><h1 id="JSOI2010-连通数"><a href="#JSOI2010-连通数" class="headerlink" title="[JSOI2010]连通数"></a>[JSOI2010]连通数</h1><h2 id="题目背景"><a href="#题目背景" class="headerlink" title="题目背景"></a>题目背景</h2><p>本题数据过水，可前往 <a href="https://www.luogu.com.cn/problem/U143178">https://www.luogu.com.cn/problem/U143178</a> 提交</p><p>$\text{upd 2022.8.4}$：已作为 Hack 数据合并进来。</p><h2 id="题目描述-2"><a href="#题目描述-2" class="headerlink" title="题目描述"></a>题目描述</h2><p>度量一个有向图连通情况的一个指标是连通数，指图中可达顶点对个的个数。</p><p>如图</p><p><img src="https://cdn.luogu.com.cn/upload/pic/15481.png" alt="qwq"></p><p>顶点 $1$ 可达 $1, 2, 3, 4, 5$</p><p>顶点 $2$ 可达 $2, 3, 4, 5$</p><p>顶点 $3$ 可达 $3, 4, 5$</p><p>顶点 $4, 5$ 都只能到达自身。</p><p>所以这张图的连通数为 $14$。</p><p>给定一张图，请你求出它的连通数</p><h2 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h2><p>输入数据第一行是图顶点的数量，一个正整数 $N$。<br>接下来 $N$ 行，每行 $N$ 个字符。第 $i$ 行第 $j$ 列的 <code>1</code> 表示顶点 $i$ 到 $j$ 有边，<code>0</code> 则表示无边。</p><h2 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行一个整数，表示该图的连通数。</p><h2 id="样例-1-2"><a href="#样例-1-2" class="headerlink" title="样例 #1"></a>样例 #1</h2><h3 id="样例输入-1-2"><a href="#样例输入-1-2" class="headerlink" title="样例输入 #1"></a>样例输入 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">010</span><br><span class="line">001</span><br><span class="line">100</span><br></pre></td></tr></table></figure><h3 id="样例输出-1-2"><a href="#样例输出-1-2" class="headerlink" title="样例输出 #1"></a>样例输出 #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9</span><br></pre></td></tr></table></figure><h2 id="提示-1"><a href="#提示-1" class="headerlink" title="提示"></a>提示</h2><p>对于 $100 %$ 的数据，$1 \le N \le 2000$。</p><p>u,i</p><p>&#x3D;1</p><p>&#x3D;0</p><p>$f[u][i]&#x3D;f[v][i] or f[u][i]$</p><p>1 01 010 01 01</p><p>bitset 1&#x2F;8</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bitset&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXN 2005</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PPP puts(<span class="string">&quot;GUCK&quot;</span>);</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">list&lt;<span class="type">int</span>&gt;g[MAXN];</span><br><span class="line">list&lt;<span class="type">int</span>&gt;ng[MAXN];</span><br><span class="line">stack&lt;<span class="type">int</span>&gt;st;</span><br><span class="line"><span class="type">int</span> n,m,ans,tx,tot,dfn[MAXN],low[MAXN],cnt,f[MAXN],bel[MAXN],in[MAXN];</span><br><span class="line">string s;</span><br><span class="line"><span class="type">bool</span> vis[MAXN],v[MAXN];</span><br><span class="line">bitset&lt;MAXN&gt;dp[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">link</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">g[x].<span class="built_in">emplace_back</span>(y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">tarjan</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">low[x]=dfn[x]=++cnt;</span><br><span class="line">st.<span class="built_in">push</span>(x);</span><br><span class="line">vis[x]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:g[x])&#123;</span><br><span class="line"><span class="keyword">if</span>(!dfn[it])&#123;</span><br><span class="line"><span class="built_in">tarjan</span>(it);</span><br><span class="line">low[x]=<span class="built_in">min</span>(low[x],low[it]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(vis[it])&#123;</span><br><span class="line">low[x]=<span class="built_in">min</span>(low[x],dfn[it]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(low[x]==dfn[x])&#123;</span><br><span class="line"><span class="type">int</span> now;</span><br><span class="line">tot++;</span><br><span class="line">dp[tot][tot]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">now=st.<span class="built_in">top</span>();</span><br><span class="line">vis[now]=<span class="number">0</span>;</span><br><span class="line">st.<span class="built_in">pop</span>();</span><br><span class="line">bel[now]=tot;</span><br><span class="line">f[tot]++;</span><br><span class="line">&#125;<span class="keyword">while</span>(x!=now);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">mkmap</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:g[i])&#123;</span><br><span class="line"><span class="keyword">if</span>(bel[i]!=bel[it])&#123;</span><br><span class="line">dp[bel[i]][bel[it]]=<span class="number">1</span>;</span><br><span class="line">ng[bel[i]].<span class="built_in">emplace_back</span>(bel[it]);</span><br><span class="line">in[bel[it]]++;</span><br><span class="line"><span class="comment">// printf(&quot;%d %d %d %d %d %d %d\n&quot;,i,it,bel[i],bel[it],in[bel[i]],in[bel[it]],bel[it]);</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">v[x]=<span class="number">1</span>;</span><br><span class="line"><span class="comment">//dp[x]=f[x];</span></span><br><span class="line"><span class="comment">//printf(&quot;%d %d df\n&quot;,dp[x],x);</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:ng[x])&#123;</span><br><span class="line"><span class="keyword">if</span>(!v[it])<span class="built_in">dfs</span>(it);</span><br><span class="line">dp[x]|=dp[it];</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">cin&gt;&gt;s;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;j&lt;s.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line"><span class="keyword">if</span>(s[j]==<span class="string">&#x27;1&#x27;</span>)&#123;</span><br><span class="line"><span class="comment">//printf(&quot;%d %d %d dfdd\n&quot;,s[j],i,j+1);</span></span><br><span class="line"><span class="built_in">link</span>(i,j+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//link(i,i);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="keyword">if</span>(!dfn[i])<span class="built_in">tarjan</span>(i);</span><br><span class="line"><span class="built_in">mkmap</span>();</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line"><span class="comment">//printf(&quot;%d \n&quot;,in[i]);</span></span><br><span class="line"><span class="keyword">if</span>(!in[i])&#123;</span><br><span class="line"><span class="built_in">dfs</span>(i);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=tot;j++)&#123;</span><br><span class="line"><span class="keyword">if</span>(dp[i][j])</span><br><span class="line">ans+=f[i]*f[j];<span class="comment">//printf(&quot;%d %d %d\n&quot;,i,j,ans);</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,ans);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><h2 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下:"></a>总结一下:</h2><h3 id="适用"><a href="#适用" class="headerlink" title="适用:"></a>适用:</h3><p>有环有向图,同时环内的贡献是一致的</p><h3 id="优点"><a href="#优点" class="headerlink" title="优点:"></a>优点:</h3><ul><li><p>将非DAG图处理为DAG</p></li><li><p>可以跑拓扑排序和一些其他的算法</p></li></ul><h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性:"></a>局限性:</h3><ul><li>不可以缩有效性的环</li><li>不可以跑有后效性的DAG图</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;基本的方程:&lt;/p&gt;
+&lt;p&gt;$f[u]&amp;#x3D;&#92;sum_{v &#92;in son(u)}f[v]+calc(v)$&lt;/p&gt;
+&lt;p&gt;$f[u]&amp;#x3D;&#92;max_{v &#92;in son(u)}f[v]+calc(v)$&lt;/p&gt;
+&lt;h1 id=&quot;CTSC1997-选课&quot;&gt;&lt;a </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>整除分块.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E6%95%B4%E9%99%A4%E5%88%86%E5%9D%97-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E6%95%B4%E9%99%A4%E5%88%86%E5%9D%97-md/</id>
+    <published>2024-06-13T14:38:57.000Z</published>
+    <updated>2024-06-13T14:39:03.325Z</updated>
+    
+    <content type="html"><![CDATA[<p>数论分块结论<br>对于常数 n，使得式子</p><p>$$\left\lfloor\dfrac ni\right\rfloor&#x3D;\left\lfloor\dfrac nj\right\rfloor$$</p><p>成立的最大的满足 $i\leq j\leq n$ 的 $j$ 的值为 $\left\lfloor\dfrac n{\lfloor\frac ni\rfloor}\right\rfloor$。</p><p>即值 </p><p>$$\left\lfloor\dfrac ni\right\rfloor$$<br> 所在的块的右端点为 </p><p>$$\left\lfloor\dfrac n{\lfloor\frac ni\rfloor}\right\rfloor$$</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;数论分块结论&lt;br&gt;对于常数 n，使得式子&lt;/p&gt;
+&lt;p&gt;$$&#92;left&#92;lfloor&#92;dfrac ni&#92;right&#92;rfloor&amp;#x3D;&#92;left&#92;lfloor&#92;dfrac nj&#92;right&#92;rfloor$$&lt;/p&gt;
+&lt;p&gt;成立的最大的满足 $i&#92;leq j&#92;leq </summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>排列与组合.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88-md/</id>
+    <published>2024-06-13T14:38:21.000Z</published>
+    <updated>2024-06-13T14:38:32.512Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="排列"><a href="#排列" class="headerlink" title="排列:"></a>排列:</h2><p>从集合{a,b,c}中取2个元素的排列有ab,ac,ba,bc,ca,cb</p><p>换言之,元素顺序对于排列是有影响的</p><p>考虑当前排列,第一个位置有N个选择,第二个位置去除第一个还有N-1种选择,以此类推到第M个还有N-M+1个选择</p><p>可以得到公式</p><p>$$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}i}{\prod_{j&#x3D;1}^{n-m}j}$$<br>前面n-m是不乘的,后面有m个<br>转化一下:<br> $$A_{N}^{M} &#x3D; \frac{n!}{(n-m)!}$$</p><h2 id="组合"><a href="#组合" class="headerlink" title="组合:"></a>组合:</h2><p>   从集合${A,b,c}$中取$2$个元素的组合有${a,b},{a,c},{b,c}$<br>   换言之,元素顺序对于排列无影响</p><ul><li><p>公式推导:</p><p>对于排列A中每一个排列,它具有相同元素的不同排列总共有N!个</p><ul><li><p>证明:</p><p>相当于从N中选取N个元素,即<br>  $$A_{N}^{N}&#x3D;\frac{n!}{(n-n)!}&#x3D;n!$$</p></li></ul><p>所以可以得到公式:<br>  $$C_{N}^{M}&#x3D;A_{N}^{M}&#x2F;m!$$<br>  $$C_{N}^{M}&#x3D;\frac{n!}{m!(n-m)!}$$</p></li><li><p>性质:<br>$$C_{N}^{M}&#x3D;C_{N}^{N-M}$$</p></li></ul><p>最好的预处理方式：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">c[<span class="number">1</span>][<span class="number">0</span>]=c[<span class="number">1</span>][<span class="number">1</span>]=c[<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=mn;i++)&#123;</span><br><span class="line">        c[i][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=i;j++)&#123;</span><br><span class="line">            c[i][j]=(c[i<span class="number">-1</span>][j]+c[i<span class="number">-1</span>][j<span class="number">-1</span>])%k;</span><br><span class="line">            <span class="keyword">if</span>(!c[i][j])s[i][j]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><p>前缀和要加上</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[i][i+<span class="number">1</span>]=s[i][i];</span><br></pre></td></tr></table></figure><p>因为三角形</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[i<span class="number">-1</span>][j]</span><br></pre></td></tr></table></figure><p>为$0$</p><p>$$C^M_N&#x3D;C^{N-M}_N$$</p><ul><li><p>证明:</p><p>将原本的每个组合都反转，把原来没选的选上，原来选了的去掉，这样就变成从n个元素种取出n−m个元素，显然方案数是相等的。</p></li></ul><p>$$C_{N}^{M}&#x3D;C_{N-1}^{M}+C_{N-1}^{M-1}$$</p><ul><li><p>证明:</p><p>可理解为：含特定元素的组合有$C_{N-1}^{M-1}$，不含特定元素的排列为$C_{N-1}^{M}$。</p><p>第一个:由于必选这个元素,看作可以把这个元素去掉的排列$(M-1)$,剩下有$(N-1)$个元素可选</p><p>第二个: 去掉这个元素,剩下$C_{N-1}^{M}$种组合</p></li></ul><p>$$ 2^n &#x3D; \sum_{i&#x3D;1}^{n}C_{n}^{i} $$</p><p>相当于从n个球中随便抽出几个球,问可能的组合有多少</p><p>对于每个球,有选和不选两种状态,根据乘法原理,总共有$2 \times 2 \times…\times 2 \quad (n个2)$种取法,即$2^n$</p><h2 id="第二类斯特林数"><a href="#第二类斯特林数" class="headerlink" title="第二类斯特林数"></a>第二类斯特林数</h2><h3 id="1-定义"><a href="#1-定义" class="headerlink" title="1.定义"></a>1.定义</h3><p>第二类斯特林数 表示的是把 $n$ 个不同的元素划分到 $m$ 个集合的方案数。</p><h3 id="2-递推式"><a href="#2-递推式" class="headerlink" title="2.递推式"></a>2.递推式</h3><p>考虑元素的编号是 $1$ 到 $n$ ，那么这 $n$ 个元素排成 $m$ 个集合有两种情况，我们考虑第 $n$ 个元素：</p><p>第 $n-1$ 个元素单独形成一个新的集合，显然方案数是 $S_2(n-1,m-1)$ 。</p><p>第 $n$ 个元素在之前已经形成的集合中，显然有 $m$ 种方法可以选，方案数是 $m \times S_2(n-1,m)$ 。</p><p>综上我们可以得到 </p><p>$$S_2(n,m)&#x3D;S_2(n-1,m-1)+m \times S_2(n-1,m)$$</p><p>我们也可以得到边界条件：</p><ul><li>$S_2(n,n)&#x3D;1 (n \geq 0)$</li></ul><p>表示 $n$ 个球和 $n$ 个盒子</p><ul><li>$S_2(n,0)&#x3D;0 (n \geq 1)$</li></ul><p>表示没有盒子</p><h3 id="3-应用举例"><a href="#3-应用举例" class="headerlink" title="3.应用举例"></a>3.应用举例</h3><p>第二类斯特林数主要是用于解决组合数学中的放球模型</p><ol><li>$n$ 个不同的球放到 $m$ 个无区别的盒子，不允许盒子为空</li></ol><p>$$S_2(n,m)$$</p><ol start="2"><li>$n$ 个不同的球放到 $m$ 个有区别的盒子，不允许盒子为空</li></ol><p>$$m! \times S_2(n,m) $$</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;排列&quot;&gt;&lt;a href=&quot;#排列&quot; class=&quot;headerlink&quot; title=&quot;排列:&quot;&gt;&lt;/a&gt;排列:&lt;/h2&gt;&lt;p&gt;从集合{a,b,c}中取2个元素的排列有ab,ac,ba,bc,ca,cb&lt;/p&gt;
+&lt;p&gt;换言之,元素顺序对于排列是有影响的&lt;/p&gt;
+&lt;</summary>
+      
+    
+    
+    
+    
+    <category term="code" scheme="http://cmach_socket.github.io/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>众数二进制拆分.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E4%BC%97%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8B%86%E5%88%86-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E4%BC%97%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8B%86%E5%88%86-md/</id>
+    <published>2024-06-13T14:37:22.000Z</published>
+    <updated>2024-06-13T14:37:40.776Z</updated>
+    
+    <content type="html"><![CDATA[<p>这个方法就是 二进制拆分。</p><p>对于一个众数，因为它在原序列中的出现次数超过了一半，那么 对于每一个二进制位来说，众数在这一位上对应的值也超过了一半。</p><p>简要复述一下该方法：对于一个序列 $a$，对于每个二进制位 $b$，求有多少个数该位是 $1$，记作 $cntb$​。</p><p>存在绝对众数 $m$ 时，如果 $m$ 某一位是 $1$，那么 $cntb$​ 一定过半，反则一定不过半。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;这个方法就是 二进制拆分。&lt;/p&gt;
+&lt;p&gt;对于一个众数，因为它在原序列中的出现次数超过了一半，那么 对于每一个二进制位来说，众数在这一位上对应的值也超过了一半。&lt;/p&gt;
+&lt;p&gt;简要复述一下该方法：对于一个序列 $a$，对于每个二进制位 $b$，求有多少个数该位是 $1$，记</summary>
+      
+    
+    
+    
+    
+    <category term="code" scheme="http://cmach_socket.github.io/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>根号算法相关.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3-md/</id>
+    <published>2024-06-13T14:36:48.000Z</published>
+    <updated>2024-06-13T14:37:45.156Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="分块相关："><a href="#分块相关：" class="headerlink" title="分块相关："></a><strong>分块相关</strong>：</h2><h2 id="分块"><a href="#分块" class="headerlink" title="分块"></a>分块</h2><p>思想简单，题目复杂。</p><h2 id="根号分治"><a href="#根号分治" class="headerlink" title="根号分治"></a>根号分治</h2><p>根号算法——不只是分块。</p><p>有时我们会碰到这样一类问题，长度为$n$的序列，$m$<br>个询问（通常$n$和$m$同阶），可能存在两种比较显然的方法，一种是$O(n^2)$预处理$O(1)$<br>回答，一种是不预处理$O(n)$回答$m$个询问，这两种方法都是$O(n^2)$的。考虑是否存在一种策略能“平衡”一下预处理和询问的复杂度。</p><h2 id="莫队相关"><a href="#莫队相关" class="headerlink" title="莫队相关:"></a><strong>莫队相关</strong>:</h2><h2 id="莫队"><a href="#莫队" class="headerlink" title="莫队"></a>莫队</h2><p>never gonna give you up</p><p>不是将询问分成 $\sqrt{q}$块，而是把询问的 $l$ 分成$\sqrt{n}$块，保证每次l的变化在$\sqrt{n}$内</p><p>通过奇偶性排序，单数块r正序排序，偶数块r倒序排序，可以进一步优化复杂度，r指针来回扫嘛</p><p>注意:</p><p>在$del()$和$add()$时记得判断是先操作再变化还是先变化再操作</p><p>栗子：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">while</span>(l&lt;q[i].l)<span class="built_in">del</span>(a[l++]);</span><br><span class="line"><span class="keyword">while</span>(l&gt;q[i].l)<span class="built_in">add</span>(a[--l]);</span><br><span class="line"><span class="keyword">while</span>(r&lt;q[i].r)<span class="built_in">add</span>(a[++r]);</span><br><span class="line"><span class="keyword">while</span>(r&gt;q[i].r)<span class="built_in">del</span>(a[r--]);</span><br></pre></td></tr></table></figure><h2 id="回滚莫队"><a href="#回滚莫队" class="headerlink" title="回滚莫队"></a>回滚莫队</h2><p>有些题目在区间转移时，可能会出现增加或者删除无法实现的问题。在只有增加不可实现或者只有删除不可实现的时候，就可以使用回滚莫队在 $O(n \sqrt m)$ 的时间内解决问题。回滚莫队的核心思想就是：既然只能实现一个操作，那么就只使用一个操作，剩下的交给回滚解决。</p><p>一般可以直接暴力记录下在块头的状态。</p><h2 id="莫队套分块"><a href="#莫队套分块" class="headerlink" title="莫队套分块"></a>莫队套分块</h2><p>莫队询问通常是 $O(1)$ 的，如果移动指针查询要带 $log$ ，可以差分操作将查询变成单点，询问变成区间。通过分块来完成复杂度平衡。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;分块相关：&quot;&gt;&lt;a href=&quot;#分块相关：&quot; class=&quot;headerlink&quot; title=&quot;分块相关：&quot;&gt;&lt;/a&gt;&lt;strong&gt;分块相关&lt;/strong&gt;：&lt;/h2&gt;&lt;h2 id=&quot;分块&quot;&gt;&lt;a href=&quot;#分块&quot; class=&quot;headerlink&quot;</summary>
+      
+    
+    
+    
+    
+    <category term="code" scheme="http://cmach_socket.github.io/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一般启发式合并.md</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E4%B8%80%E8%88%AC%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E4%B8%80%E8%88%AC%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6-md/</id>
+    <published>2024-06-13T14:35:30.000Z</published>
+    <updated>2024-06-13T14:38:07.962Z</updated>
+    
+    <content type="html"><![CDATA[<p>启发式合并就是在合并的时候将size小的那个集合合并到size大的那个集合里面。</p><p>复杂度居然是$O(n log n)$的</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;启发式合并就是在合并的时候将size小的那个集合合并到size大的那个集合里面。&lt;/p&gt;
+&lt;p&gt;复杂度居然是$O(n log n)$的&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    
+    <category term="code" scheme="http://cmach_socket.github.io/tags/code/"/>
     
   </entry>
   
@@ -52,26 +376,6 @@
     
     
     <category term="code" scheme="http://cmach_socket.github.io/tags/code/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://cmach_socket.github.io/2024/06/13/hello-world/"/>
-    <id>http://cmach_socket.github.io/2024/06/13/hello-world/</id>
-    <published>2024-06-13T10:57:55.002Z</published>
-    <updated>2024-06-13T10:57:55.002Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
-      
-    
-    
-    
     
   </entry>
   
