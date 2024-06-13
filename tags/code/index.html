@@ -436,23 +436,140 @@
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2024/06/13/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88-md/">
+            <a class="abstract-title" href="/2024/06/14/%E6%89%A9%E5%B1%95CRT/">
                 
-                <span class="abstract-title-text">排列与组合.md</span>
+                <span class="abstract-title-text">扩展CRT</span>
             </a>
             <div class="abstract-content">
-                排列:从集合{a,b,c}中取2个元素的排列有ab,ac,ba,bc,ca,cb
-换言之,元素顺序对于排列是有影响的
-考虑当前排列,第一个位置有N个选择,第二个位置去除第一个还有N-1种选择,以此类推到第M个还有N-M+1个选择
-可以得到公式
-$$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}i}{\prod_{j&#x3D;1}^{n-m}j}$$前面n-m是不乘的,后面有m个转化一下: $$A_{N}^{M} &#x3D; \frac{n!}{(n-m)!}$$
-组合:   ...
+                思路:转化为求解二元一次方程,再合并
+求解:$$\begin{cases}x \equiv r_{1} \quad  (mod  \quad m_{1} ) \x \equiv r_{2} \quad (mod \quad m_{2}  )\\quad … \x \equiv r_{n} \quad (mod \quad m_{n})\end{cases}$$
+其中$x \in Z  \bigvee r,m \subseteq Z$                               
+首先考虑:$$\begin{cases}x \equiv r_{1} \quad  (mod ...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/06/13">
+                <div class="abstract-date" title="Last updated: 2024/06/14">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/14</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="code">code</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/06/14/demogen-%E5%AE%B9%E6%96%A5/">
+                
+                <span class="abstract-title-text">demogen/容斥</span>
+            </a>
+            <div class="abstract-content">
+                德摩根:$$\overline{\bigcup_{i&#x3D;1}^{n}A_{i}}&#x3D;\bigcap_{i&#x3D;1}^{n}\overline{A_{i}}$$
+$$\overline{\bigcap_{i&#x3D;1}^{n}A_{i}}&#x3D;\bigcup_{i&#x3D;1}^{n}\overline{A_{i}}$$
+求一个全集中所有子集的交
+$$\begin{split}\left|\bigcup_{i&#x3D;1}^{n}S_i\right|&#x3D;&amp;\sum_{i}|S_i|-\sum_{i&lt;j}|S_i\cap S_j|+\...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/06/14">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/14</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="code">code</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/06/14/%E4%B8%80%E4%BA%9B%E5%A4%A7%E8%BF%90%E7%AE%97/">
+                
+                <span class="abstract-title-text">一些大运算</span>
+            </a>
+            <div class="abstract-content">
+                总体来说,也遵循提公因式和因式分解
+此外,还有一些特殊的运算
+设
+$$\overline{x} &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} a_{i} $$
+$$s &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} (a_{i}-\overline{x})^2 $$
+则有
+$$s &#x3D; \frac{1}{n} \sum_{i&#x3D;1}^{n} (a_{i}^2 - 2 \overline{x}a_{i} + \overline{x}^2) $$ $$ &#x3D; \frac{1}{n} \sum_{i&#x3D...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/06/14">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/14</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="code">code</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/06/13/hash/">
+                
+                <span class="abstract-title-text">hash</span>
+            </a>
+            <div class="abstract-content">
+                单hash定义了上面的两个数组，首先 hash[i] 表示前 i 个字符的字串的hash 值。而 p[i] 表示 $Base ^ i$ 
+那么对应的 Hash 公式为：
+$$hash[i] &#x3D; (hash[i-1] * Base + idx(s[i])) % MOD$$
+对于此种Hash方法，将Base和MOD尽量取大即可，这种情况下，冲突的概率是很低的。
+双Hash用字符串Hash，最怕的就是，出现冲突的情况，即不同字符串却有着相同的hash值，这是我们不想看到的。所以为了降低冲突的概率，可以用双Hash方法。
+将一个字符串用不同的Base和MOD，hash两次，将这两个结果...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/06/14">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/13</span>
                 </div>
                 <!-- tags -->
@@ -476,22 +593,19 @@ $$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2024/06/13/%E4%BC%97%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8B%86%E5%88%86-md/">
+            <a class="abstract-title" href="/2024/06/13/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">
                 
-                <span class="abstract-title-text">众数二进制拆分.md</span>
+                <span class="abstract-title-text">矩阵乘法</span>
             </a>
             <div class="abstract-content">
-                这个方法就是 二进制拆分。
-对于一个众数，因为它在原序列中的出现次数超过了一半，那么 对于每一个二进制位来说，众数在这一位上对应的值也超过了一半。
-简要复述一下该方法：对于一个序列 $a$，对于每个二进制位 $b$，求有多少个数该位是 $1$，记作 $cntb$​。
-存在绝对众数 $m$ 时，如果 $m$ 某一位是 $1$，那么 $cntb$​ 一定过半，反则一定不过半。
+                $A_{i,j}&#x3D;c$ 表示 将$c$倍$f_{j}$转移到$f_{i}$
 
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/06/13">
+                <div class="abstract-date" title="Last updated: 2024/06/14">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/13</span>
                 </div>
                 <!-- tags -->
@@ -515,23 +629,29 @@ $$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2024/06/13/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3-md/">
+            <a class="abstract-title" href="/2024/06/13/FHQ-Treap/">
                 
-                <span class="abstract-title-text">根号算法相关.md</span>
+                <span class="abstract-title-text">FHQ-Treap</span>
             </a>
             <div class="abstract-content">
-                分块相关：分块思想简单，题目复杂。
-根号分治根号算法——不只是分块。
-有时我们会碰到这样一类问题，长度为$n$的序列，$m$个询问（通常$n$和$m$同阶），可能存在两种比较显然的方法，一种是$O(n^2)$预处理$O(1)$回答，一种是不预处理$O(n)$回答$m$个询问，这两种方法都是$O(n^2)$的。考虑是否存在一种策略能“平衡”一下预处理和询问的复杂度。
-莫队相关:莫队never gonna give you up
-不是将询问分成 $\sqrt{q}$块，而是把询问的 $l$ 分成$\sqrt{n}$块，保证每次l的变化在$\sqrt{n}$内
-通过奇偶性排序，单数块r正序排序...
+                依赖分裂合并的tree+heap（听起来像ODT）
+核心操作：分裂：
+一种是按权值分裂，一种是按排名分裂
+根据粉兔的博客，发现权值操作都可以通过rank转化为排名
+于是乎只打排名了
+当前需要的排名比左儿子数量大，即左子树和其本身归为第一颗分裂树，进入右子树
+反之同理，上述过程可以用BST性质解释
+通过BST的性质，也可以知道传下来的引用就是两颗子树预备插入节点
+合并：
+treap以随机化id来构造期望平衡的BST，合并的时候第一颗树的所有节点一定比第二颗树小，
+于是合并时候只需考虑合并节点的 $id$
+左子树 $id$ 小，将右子树挂载到右儿子下，右子树 $id$ 小，则将左子树挂载到右...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/06/13">
+                <div class="abstract-date" title="Last updated: 2024/06/14">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/13</span>
                 </div>
                 <!-- tags -->
@@ -555,20 +675,23 @@ $$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2024/06/13/%E4%B8%80%E8%88%AC%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6-md/">
+            <a class="abstract-title" href="/2024/06/13/%E5%9B%BE%E4%B8%8A%E4%BA%8C%E5%88%86/">
                 
-                <span class="abstract-title-text">一般启发式合并.md</span>
+                <span class="abstract-title-text">图上二分</span>
             </a>
             <div class="abstract-content">
-                启发式合并就是在合并的时候将size小的那个集合合并到size大的那个集合里面。
-复杂度居然是$O(n log n)$的
+                一般是二分边或者点的权值。属于二分答案
+设 $check$ 为检测值，
+当 $it.w&gt;check$ 或者 $a[it.y]&gt;check$ 时，走或者不走
+用于解决最大值最小或者最小值最大的问题。
+二分正确性：答案在边权或者点权的值域上，值域是单调的
 
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/06/13">
+                <div class="abstract-date" title="Last updated: 2024/06/14">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/13</span>
                 </div>
                 <!-- tags -->
@@ -592,22 +715,115 @@ $$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}
             
         
         <article class="index-post">
-            <a class="abstract-title" href="/2024/06/13/%E6%A0%91%E5%88%86%E6%B2%BB%E7%9B%B8%E5%85%B3/">
+            <a class="abstract-title" href="/2024/06/13/2-SAT/">
                 
-                <span class="abstract-title-text">树分治相关</span>
+                <span class="abstract-title-text">2-SAT</span>
             </a>
             <div class="abstract-content">
-                一种特别的分治思想，但难点不在于点分治思想本身。
-有板子，但是板子跟题目重点几乎无关。
-点分治 淀粉质用途：用于处理树上多对点询问或寻找有条件最远（最近）点对。主要是处理多对点对。
-做法：我们先选择一个节点作为根节点 $rt$ ，所有完全位于其子树中的路径可以分为两种，一种是经过当前根节点的路径，一种是不经过当前根节点的路径。前一种我们在这次分治中得到，后面一种在之后的分治中计算，就转化为了第一种路径。
-考虑枚举分治中心 $rt$ 的子节点 $u$ ，对于经过 $rt$ 的路径上的所有点 $v$ ，$u$ 都要与其计算一次贡献,可以得出 $v$的点集 是 $rt$ 不包含 $u$ 的子树...
+                思路类似于差分约束,将数学问题转化为图论问题
+也是判环来判断可行性
+建图+tarjan
+为什么不用spfa判环?
+tarjan算法更优秀 $O(n+m)$ ,并且tarjan序就是反拓扑序,方便求解
+2-sat问题指每一个变量存在两种状态(2),这些变量需要满足一些条件(sat)
+这些条件是逻辑条件:or,xor,and
+2-sat问题转化所有的逻辑关系都可以转化为这样的形式:选择了A,则必须选择B
+从A到B连一条边,就可以表示这样的关系
+若存在环内有一个变量的两个状态,则说明有一个无法满足的依赖链(例如 选$A_1$必选$B_2$ …. 选$B_2$必选$A_2$),这时选$A_1$也...
             </div>
             <!-- read more -->
             
             <div class="abstract-post-meta">
                 <!-- date -->
-                <div class="abstract-date" title="Last updated: 2024/06/13">
+                <div class="abstract-date" title="Last updated: 2024/06/14">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/13</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="code">code</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/06/13/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F/">
+                
+                <span class="abstract-title-text">差分约束系统</span>
+            </a>
+            <div class="abstract-content">
+                差分约束系统
+$x_1-x_2 \leq y_1$
+…
+$x_i-x_j \leq y_i$
+将$x_i-xj \leq y_i$ 移项，得
+$x_i \leq x_j+y_i$
+可建立一条从$x_j$到$x_i$的路径，权值为$y_2$
+将线性规划问题转化为图论问题
+
+差分约束系统的转化:
+$x_1-x_2 \geq y  \to  x_2-x_1 \leq -y_1$
+
+$x_1 &#x3D; x_2     \to  x_1-x_2 \leq 0 \quad and \quad x_2-x_1 \leq 0$
+
+$x_1 - x_2 &lt; y   \to  x_1-x_2 \l...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/06/14">
+                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/13</span>
+                </div>
+                <!-- tags -->
+                
+                    <div class= abstract-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="code">code</a>
+    
+</div>
+
+                
+            </div>
+        </article>
+        <div class="index-post-divider"></div>
+    
+        
+        
+        
+        
+            
+        
+        <article class="index-post">
+            <a class="abstract-title" href="/2024/06/13/%E6%A0%91%E5%9E%8BDP%E5%92%8C%E7%BC%A9%E7%82%B9%E5%90%8E%E6%A0%91%E5%9E%8BDP/">
+                
+                <span class="abstract-title-text">树型DP和缩点后树型DP</span>
+            </a>
+            <div class="abstract-content">
+                基本的方程:
+$f[u]&#x3D;\sum_{v \in son(u)}f[v]+calc(v)$
+$f[u]&#x3D;\max_{v \in son(u)}f[v]+calc(v)$
+[CTSC1997] 选课题目描述在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习，在课程里有些课程必须在某些课程之前学习，如高等数学总是在其它课程之前学习。现在有 $N$ 门功课，每门课有个学分，每门课有一门或没有直接先修课（若课程 a 是课程 b 的先修课即只有学完了课程 a，才能学习课程 b）。一个学生要从这些课程里选择 $M$ 门课程学习，问他能获得的最大学分是多少？
+...
+            </div>
+            <!-- read more -->
+            
+            <div class="abstract-post-meta">
+                <!-- date -->
+                <div class="abstract-date" title="Last updated: 2024/06/14">
                     <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2024/06/13</span>
                 </div>
                 <!-- tags -->
@@ -625,6 +841,10 @@ $$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}
         <div class="index-post-divider"></div>
     
     <!-- paginator  -->
+    
+        <nav class="page-nav">
+            <span class="page-number current">1</span><a class="page-number" href="/tags/code/page/2/">2</a><a class="extend next" rel="next" href="/tags/code/page/2/">NEXT &gt;</a>
+        </nav>
     
 </main>
 
@@ -922,91 +1142,91 @@ $$A_{N}^{M} &#x3D; \prod_{i&#x3D;0}^{m-1}(n-i) &#x3D; \frac{\prod_{i&#x3D;1}^{n}
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/14</span>
-            <a class="archive-post-title" href="/2024/06/14/demogen-%E5%AE%B9%E6%96%A5-md/">demogen/容斥.md</a>
+            <a class="archive-post-title" href="/2024/06/14/demogen-%E5%AE%B9%E6%96%A5/">demogen/容斥</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/14</span>
-            <a class="archive-post-title" href="/2024/06/14/%E4%B8%80%E4%BA%9B%E5%A4%A7%E8%BF%90%E7%AE%97-md/">一些大运算.md</a>
+            <a class="archive-post-title" href="/2024/06/14/%E4%B8%80%E4%BA%9B%E5%A4%A7%E8%BF%90%E7%AE%97/">一些大运算</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/14</span>
-            <a class="archive-post-title" href="/2024/06/14/%E6%89%A9%E5%B1%95CRT-md/">扩展CRT.md</a>
+            <a class="archive-post-title" href="/2024/06/14/%E6%89%A9%E5%B1%95CRT/">扩展CRT</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/2-SAT-md/">2-SAT.md</a>
+            <a class="archive-post-title" href="/2024/06/13/2-SAT/">2-SAT</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/FHQ-Treap-md/">FHQ-Treap.md</a>
+            <a class="archive-post-title" href="/2024/06/13/FHQ-Treap/">FHQ-Treap</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/hash-md/">hash.md</a>
+            <a class="archive-post-title" href="/2024/06/13/hash/">hash</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E4%B8%80%E8%88%AC%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6-md/">一般启发式合并.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E4%B8%80%E8%88%AC%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6/">一般启发式合并</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E4%BC%97%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8B%86%E5%88%86-md/">众数二进制拆分.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E4%BC%97%E6%95%B0%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8B%86%E5%88%86/">众数二进制拆分</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E5%9B%BE%E4%B8%8A%E4%BA%8C%E5%88%86-md/">图上二分.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E5%9B%BE%E4%B8%8A%E4%BA%8C%E5%88%86/">图上二分</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F-md/">差分约束系统.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F/">差分约束系统</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88-md/">排列与组合.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/">排列与组合</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E6%95%B4%E9%99%A4%E5%88%86%E5%9D%97-md/">整除分块.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E6%95%B4%E9%99%A4%E5%88%86%E5%9D%97/">整除分块</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E6%A0%91%E5%9E%8BDP%E5%92%8C%E7%BC%A9%E7%82%B9%E5%90%8E%E6%A0%91%E5%9E%8BDP-md/">树型DP和缩点后树型DP.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E6%A0%91%E5%9E%8BDP%E5%92%8C%E7%BC%A9%E7%82%B9%E5%90%8E%E6%A0%91%E5%9E%8BDP/">树型DP和缩点后树型DP</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3-md/">根号算法相关.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E6%A0%B9%E5%8F%B7%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3/">根号算法相关</a>
         </li>
     
         
         <li class="archive-post-item">
             <span class="archive-post-date">06/13</span>
-            <a class="archive-post-title" href="/2024/06/13/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95-md/">矩阵乘法.md</a>
+            <a class="archive-post-title" href="/2024/06/13/%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/">矩阵乘法</a>
         </li>
     
         
