@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>cmach_socket的博客</title>
+  
+  <subtitle>一个隐身于众多躯壳中 孤愤而又堕落的残废</subtitle>
+  <link href="http://cmach_socket.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://cmach_socket.github.io/"/>
+  <updated>2024-06-13T13:50:20.710Z</updated>
+  <id>http://cmach_socket.github.io/</id>
+  
+  <author>
+    <name>cmach_socket</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[404]</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/404-md/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/404-md/</id>
+    <published>2024-06-13T13:50:09.430Z</published>
+    <updated>2024-06-13T13:50:20.710Z</updated>
+    
+    
+    <summary type="html">May the Force be with you :&amp;#41;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>树分治相关</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/%E6%A0%91%E5%88%86%E6%B2%BB%E7%9B%B8%E5%85%B3/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/%E6%A0%91%E5%88%86%E6%B2%BB%E7%9B%B8%E5%85%B3/</id>
+    <published>2024-06-13T12:25:28.000Z</published>
+    <updated>2024-06-13T13:40:42.487Z</updated>
+    
+    <content type="html"><![CDATA[<p>一种特别的分治思想，但难点不在于点分治思想本身。</p><p>有板子，但是板子跟题目重点几乎无关。</p><h2 id="点分治-淀粉质"><a href="#点分治-淀粉质" class="headerlink" title="点分治 淀粉质"></a>点分治 <del>淀粉质</del></h2><h3 id="用途："><a href="#用途：" class="headerlink" title="用途："></a><strong>用途</strong>：</h3><p>用于处理树上多对点询问或寻找有条件最远（最近）点对。主要是处理多对点对。</p><h3 id="做法："><a href="#做法：" class="headerlink" title="做法："></a><strong>做法</strong>：</h3><p>我们先选择一个节点作为根节点 $rt$ ，所有完全位于其子树中的路径可以分为两种，一种是经过当前根节点的路径，一种是不经过当前根节点的路径。前一种我们在这次分治中得到，后面一种在之后的分治中计算，就转化为了第一种路径。</p><p>考虑枚举分治中心 $rt$ 的子节点 $u$ ，对于经过 $rt$ 的路径上的所有点 $v$ ，$u$ 都要与其计算一次贡献,可以得出 $v$的点集 是 $rt$ 不包含 $u$ 的子树的子树中所有点。</p><p>一般我们考虑容斥或不计算 $u$ 子树内结点与 $u$ 产生的额外（或者错误）贡献。</p><p>选取分治中心为每次分治后的树的重心，总处理结点数量为$O(nlogn)$</p><p>树的重心用一个简单树型dp求。</p><h3 id="处理方法与难点"><a href="#处理方法与难点" class="headerlink" title="处理方法与难点:"></a><strong>处理方法与难点</strong>:</h3><p>跟分块一样，分治之后处理是一大问题。常见的处理方式有两种：</p><ul><li>套用数据结构，对于每个分治中心维护一个动态的数据结构（如动态开点线段树，平衡树），直接区间查询修改处理子树内贡献</li><li>利用排序+二分或双指针，将数据有序化并尽快找到所需的区间端点。</li></ul><p>两种方法各有优缺。</p><p>对于套用数据结构，会增加 $logn$ 级别的常数，此外一般需要支持动态开点保证不爆空间。</p><p>对于双指针，要注意扫描一次序列时间复杂度是 $O(L)$ 的，$L$ 是序列长度。而二分是 $O(logL)$ 的，如果不是在一次序列中求多对符合要求的区间，尽量使用二分。</p><p>离散化和桶排序是点分治中会常用的思想，没思路的时候可以往这两个方面想。如果值域很大桶装不下，可以考虑将权值存出来然后排序。权值相同的元素一定相邻。</p><p>难点在于思考出合适的处理方法。<del>实在想不到就乱搞吧</del></p><h2 id="边分治"><a href="#边分治" class="headerlink" title="边分治"></a>边分治</h2><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a><strong>思路</strong>：</h3><p>与上面的点分治类似，我们选取一条边，把树尽量均匀地分成两部分（使边连接的两个子树的 $size$ 尽量接近）。然后递归处理左右子树，统计信息。</p><p>如果是个菊花图，每次断边只会断掉一个结点，所以会被卡成 $O(n^2)$ ,而二叉树性质很优秀啊（）,这时候就需要多叉转二叉（也就是三度化）。</p><h3 id="三度化："><a href="#三度化：" class="headerlink" title="三度化："></a><strong>三度化</strong>：</h3><p>三度化方式有两种。写法简单的一种是:</p><p>把所有儿子依次加一个点串起来</p><p>就算把所有点都加一个点串起来，我们也最多增加了 $n$ 个点， $n$ 条边，所有复杂度还是同阶的。</p><p>新增的点和边要注意他们的值，一般将点权和边权设置为 $0$ ，也有例外，所以还是根据题目需要来。</p><p>可以模拟一下发现，即使分治中心是虚边，也不会存在统计重复的点对。</p><p>小细节是因为我们需要知道分治中心边的两端点，所以需要记录是第几条边。于是乎需要用到成对变换来存边。</p><p><a href="https://imgse.com/i/pFu7x00"><img src="https://s11.ax1x.com/2024/01/29/pFu7x00.png" alt="直观的图"></a></p><p>code:</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">mkmap</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> fa)</span></span>&#123;<span class="comment">//三度化（多叉转二叉）</span></span><br><span class="line"><span class="type">int</span> tnd=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> it:og[x])&#123;</span><br><span class="line"><span class="keyword">if</span>(it.y==fa)<span class="keyword">continue</span>;</span><br><span class="line"><span class="keyword">if</span>(!tnd)&#123;</span><br><span class="line"><span class="built_in">link</span>(x,it.y,it.w);</span><br><span class="line"><span class="built_in">link</span>(it.y,x,it.w);</span><br><span class="line">tnd=x;<span class="comment">//该连接的结点</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">++nn;</span><br><span class="line"><span class="comment">//赋值 ！！！</span></span><br><span class="line"><span class="built_in">link</span>(tnd,nn,<span class="number">0</span>);<span class="built_in">link</span>(nn,tnd,<span class="number">0</span>);<span class="comment">//赋值!!!</span></span><br><span class="line"><span class="built_in">link</span>(it.y,tnd,it.w);<span class="built_in">link</span>(tnd,it.y,it.w);</span><br><span class="line">tnd=nn;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">mkmap</span>(it.y,x);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="处理方法-优点："><a href="#处理方法-优点：" class="headerlink" title="处理方法&#x2F;优点："></a><strong>处理方法&#x2F;优点</strong>：</h3><p>边分治的处理方法比点分治容易，有时候还能省下为了容斥才使用到的数据结构使得复杂度降低码量。</p><p>边分治一般不用考虑容斥，一个点在左端点的子树内，那么要统计贡献的点一定都在右端点的子树内。反之同理。所以可以左右子树分开存互不影响。</p><p>边分治将每次的分治联通块中的点恰好分成了两部分，这就省去了像点分治那样单独处理以分治重心为路径端点的答案这一过程。</p><h3 id="适用-局限："><a href="#适用-局限：" class="headerlink" title="适用&#x2F;局限："></a><strong>适用&#x2F;局限</strong>：</h3><p>几乎所有点分治的题边分都能做（常数上有差距，但是不卡）。</p><p>局限在于虚点虚边必须不影响答案</p><h2 id="点分树-动态点分治-："><a href="#点分树-动态点分治-：" class="headerlink" title="点分树(动态点分治)："></a>点分树(动态点分治)：</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义:"></a><strong>定义</strong>:</h3><p>点分树是通过更改原树形态使得层数变为$logn$级别。</p><p>点分治的过程就是构造点分树的过程。将上一层的分治中心 $u$ 与他的下一层分治中心 $v$ 连边，重构出一棵虚树。（实际上一般 $fa_v&#x3D;u$ 就行）</p><h3 id="用途：-1"><a href="#用途：-1" class="headerlink" title="用途："></a><strong>用途</strong>：</h3><p>处理多次询问和带修的点分治问题。并且不会修改操作改变原树的形态（即不会改变每次重心的选取。）</p><p>在点分数上向上暴力跳链复杂度是不大于 $O(logn)$ 的（因为层数不大于 $O(logn)$ ）。</p><p>对于任意一个 $y$，首先在虚树上找到它与 $x$ 的 $lca$ 该点必定在原树的 $x,y$ 路径上。</p><ul><li>看不懂的证明：$lca$ :（或者说囊括连通块同时包含 $x,y$ 的所有虚树节点中深度最深的那一个），易知在以此点为重心划分子连通块时 $x,y$会首次被分割开来</li></ul><p>$x$ 与某个结点在虚树上的 $lca$ 一定是 $x$ 的祖先，所以这些点都在 $x$ 的祖先 <strong>除开 $x$ 的子树的子树上</strong>（类似于点分治的味道），因为 $x$ 的祖先在 $x$子树内的结点与$x$ 的 $lca$ 不是这个祖先而是 $x$ 到这个祖先的链上（不含这个祖先）的一个结点。</p><h3 id="实现："><a href="#实现：" class="headerlink" title="实现："></a><strong>实现</strong>：</h3><p>与点分治板子部分相同。只是多一个建树过程。</p><h3 id="处理方法："><a href="#处理方法：" class="headerlink" title="处理方法："></a><strong>处理方法</strong>：</h3><p>对于一个点，我们要统计或修改其对所有虚树上祖先的贡献。这个过程可以暴力向上跳完成。</p><p>通常我们需要统计虚树上的结点到其虚树上子节点的实树上的信息。实树上的信息与虚树上无关，例如处理虚树上的点到父亲的距离需要在实树上树链剖分求链长。</p><h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a><strong>注意事项</strong>：</h3><p>实树上的信息与虚树无关，时刻警惕你需要哪棵树的信息。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;一种特别的分治思想，但难点不在于点分治思想本身。&lt;/p&gt;
+&lt;p&gt;有板子，但是板子跟题目重点几乎无关。&lt;/p&gt;
+&lt;h2 id=&quot;点分治-淀粉质&quot;&gt;&lt;a href=&quot;#点分治-淀粉质&quot; class=&quot;headerlink&quot; title=&quot;点分治 淀粉质&quot;&gt;&lt;/a&gt;点分治 &lt;de</summary>
+      
+    
+    
+    
+    
+    <category term="code" scheme="http://cmach_socket.github.io/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://cmach_socket.github.io/2024/06/13/hello-world/"/>
+    <id>http://cmach_socket.github.io/2024/06/13/hello-world/</id>
+    <published>2024-06-13T10:57:55.002Z</published>
+    <updated>2024-06-13T10:57:55.002Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
