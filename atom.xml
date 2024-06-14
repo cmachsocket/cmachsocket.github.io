@@ -6,7 +6,7 @@
   <link href="http://cmach_socket.github.io/atom.xml" rel="self"/>
   
   <link href="http://cmach_socket.github.io/"/>
-  <updated>2024-06-13T23:44:34.495Z</updated>
+  <updated>2024-06-14T00:24:30.376Z</updated>
   <id>http://cmach_socket.github.io/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>404 - 一片虚空</title>
+    <link href="http://cmach_socket.github.io/2024/06/14/404/"/>
+    <id>http://cmach_socket.github.io/2024/06/14/404/</id>
+    <published>2024-06-14T00:19:29.064Z</published>
+    <updated>2024-06-14T00:24:30.376Z</updated>
+    
+    
+    <summary type="html">May the Force be with you :&amp;#41;</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>扩展CRT</title>
